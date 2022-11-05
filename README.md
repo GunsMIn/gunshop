@@ -13,6 +13,8 @@
 그 이유는 즉시로딩을 하면 예측이 굉장히 어렵고, 어떤 SQL이 실행될지 추적하기 어렵다. 특히 JPQL을 실행할때 N+1 문제가 발생된다.<br>
 연관된 엔티티를 함께 DB에서 조회해야 할 경우에는 fetch join을 이용한다.<br>
 @XToOne(OneToOne, ManyToOne) 관계는 기본이 즉시로딩이므로 직접 지연로딩으로 설정해야 한다<br>
+<img width="500" alt="캡처" src="https://user-images.githubusercontent.com/104709432/200106344-8f439faf-18e7-4dd6-b69a-e74471825bed.PNG">
+->추후 fetch join 이나 엔티티 그래프를 이용해서 조회
 
 2.컬렉션은 필드에서 초기화하자 <br>
 컬렉션은 필드에서 바로 초기화 하는 것이 안전하다.null 문제에서 안전하다.<br>
