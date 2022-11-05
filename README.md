@@ -7,11 +7,6 @@
 <img width="700" alt="연관관계" src="https://user-images.githubusercontent.com/104709432/200105941-1748567b-f895-426f-bcb8-073736963238.PNG">
 <b>연관관계의 주인은 단순히 외래 키를 누가 관리하냐의 문제이지 비즈니스상 우위에 있다고 주인으로 정하면
 안된다.</b> <br><br>
-<summary> fetch 추가 : fetch를 LAZY상태로 변경 및 양뱡항 편의 메소드 추가</summary><br>
-<summary> 서비스,레퍼지토리 추가 : 회원 엔티티에 관한 service / repository제작 및 item 비지니스 로직 , exception 제작</summary><br>
-<summary> 서비스,레퍼지토리 추가2 : order, orderItem, item에 관한 repository / service 제작 </summary><br>
-<summary> 컨트롤러, view 추가 : 메인페이지, 회원가입페이지, 회원목록 페이지추가 및 memberController 제작</summary><br>
-<summary> last commit : 상품등록페이지, 상품주문페이지 제작 및 상품 등록,수정,삭제 컨틀롤러제작</summary><br>
 
 <b>- 엔티티의 성능 최적화 :</b><br>
 1.모든 연관관계는 지연로딩으로 설정해주자!<br>
