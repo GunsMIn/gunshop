@@ -8,9 +8,9 @@ import javax.persistence.Entity;
 
 @Entity @Getter @Setter
 @DiscriminatorValue("book")
-public class Book extends Item{
+public class Book extends Item {
 
     private String author;
     private String isbn;
-
 }
+

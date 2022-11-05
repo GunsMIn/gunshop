@@ -14,7 +14,7 @@ import static javax.persistence.InheritanceType.*;
 @Entity @Getter @Setter
 @Inheritance(strategy = SINGLE_TABLE)
 @DiscriminatorColumn(name="itemType")
-public  abstract class Item {
+public abstract class Item {
 
     @Id @GeneratedValue @Column(name = "item_id")
     private Long id;
@@ -27,5 +27,7 @@ public  abstract class Item {
 
     @ManyToMany(mappedBy = "items" )
     private List<Category> catagories = new ArrayList<>();
+
+
 
 }
