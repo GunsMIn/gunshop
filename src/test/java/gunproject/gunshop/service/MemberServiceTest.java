@@ -33,30 +33,23 @@ class MemberServiceTest {
 
     @Test
     public void 중복_회원_검사사() throws Exception {
-
         assertThrows(IllegalStateException.class,() ->{
             Member member1 = new Member("김건우");
             Member member2 = new Member("김건우2");
             memberService.join(member1);
             memberService.join(member2);
         });
+    }
 
+    @Test
+    public void 회원_단건_조회() {
+        Member member1 = new Member("김건우");
+        memberService.join(member1);
+        Member one = memberService.findOne(1L);
 
-       /* //given
-        Member member = new Member();
-        member.setName("김건우");
-        Member member2 = new Member();
-        member2.setName("김건우");
-
-        //when
-        memberService.join(member);
-        try {
-            memberService.join(member2);//예외가 발생해야한다!!!!!!
-        }catch (IllegalStateException e){
-            return;
-        }
-        //then
-        Assertions.fail("이미 존재하는 회원입니다.");*/
-
+        assertThat(one.getName()).isEqualTo(member1.getName());
+        assertThrows(IllegalStateException.class, () -> {
+            memberService.findOne(2L);
+        });
     }
 }
