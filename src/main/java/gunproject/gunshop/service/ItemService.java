@@ -1,6 +1,8 @@
 package gunproject.gunshop.service;
 
+import gunproject.gunshop.domain.item.Book;
 import gunproject.gunshop.domain.item.Item;
+import gunproject.gunshop.dto.BookForm;
 import gunproject.gunshop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -39,6 +41,16 @@ public class ItemService {
         return item;
     }
 
+    //변경감지
+    public void updateItem(Long id, BookForm updateForm) {
+        Optional<Item> opItem = itemRepository.findById(id);
+        Book item = (Book)opItem.orElse(new Book());
+        item.setName(updateForm.getName());
+        item.setPrice(updateForm.getPrice());
+        item.setStockQuantity(updateForm.getStockQuantity());
+        item.setAuthor(updateForm.getAuthor());
+        item.setIsbn(updateForm.getIsbn());
+    }
 
 
 
