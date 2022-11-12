@@ -19,7 +19,7 @@ public class MemberService {
     //중복이름 체크
     @Transactional
     public Long join(Member member) {
-        validateName(member); // 중복회원 검증
+        validateName(member); // 중복회원 검증 <- 이름으로 중복 검사하는 메소드
         memberRepository.save(member);
         return member.getId();
     }
@@ -36,7 +36,7 @@ public class MemberService {
     public Member findOne(Long id) {
         Optional<Member> member = memberRepository.findById(id);
         return member.orElseThrow(() -> {
-            throw new IllegalStateException("존재하지않는회원");
+            throw new IllegalStateException("존재 하지 않는 회원입니다.");
         });
     }
 
