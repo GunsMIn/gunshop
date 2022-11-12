@@ -41,7 +41,10 @@ public class ItemService {
         return item;
     }
 
-    //변경감지
+    //변경감지(dirty checking)
+    //JPA는 ENTITY를 보관할때 최초의 상채를 저장하고 있디. 이것을 스냅샷이라고 하며,
+    //영속성 컨텍스트가 FLUSH되는 시점에서 스냅샷과 현재 엔티티의 상태를 비교하여 달라진 엔티티를 찾는다.
+    //이후 변경된 필드들을 이용하여 쓰기지연 SQL 저장소에 Update 쿼리를 생성하여 쌓아 둔다.
     public void updateItem(Long id, BookForm updateForm) {
         Optional<Item> opItem = itemRepository.findById(id);
         Book item = (Book)opItem.orElse(new Book());
