@@ -33,6 +33,7 @@ public class MemberController {
         return "/members/createMemberForm";
     }
 
+    //회원 등록 컨틀롤러
     @PostMapping("/members/new")
     public String joinMember(@ModelAttribute @Validated MemberForm memberForm, BindingResult result) {
         //validation에 검증에 걸렸을 때 다시 원복하기위해서
@@ -47,6 +48,7 @@ public class MemberController {
         return "redirect:/";
     }
 
+    //회원 리스트 컨트롤러
     @GetMapping("/members")
     public String goMemberList(Model model) {
         List<Member> members = memberService.findAll();

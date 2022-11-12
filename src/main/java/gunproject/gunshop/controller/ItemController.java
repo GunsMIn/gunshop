@@ -30,9 +30,9 @@ public class ItemController {
         return "items/createItemForm";
     }
 
+    //아이템 등록 컨트롤러
     @PostMapping("items/new")
     public String registerItem(@ModelAttribute("form") @Validated BookForm form, BindingResult result) {
-
         //itemDto에서 validation 검증에 걸렸을 때 원복시켜줌
         if (result.hasErrors()) {
             return "items/createItemForm";
@@ -51,6 +51,7 @@ public class ItemController {
         return "redirect:/";
     }
 
+    //아이템 리스트 이동 페이지 ->List<Item>
     @GetMapping("/items")
     public String list(Model model) {
         List<Item> items = itemService.findAll();
@@ -58,11 +59,13 @@ public class ItemController {
         return "/items/itemList";
     }
 
+    //아이템 수정 페이지로 이동
     @GetMapping("/items/{id}/edit")
     public String goUpdateForm(@PathVariable Long id, Model model) {
         //여기서 중요한 점 영속성 컨텍스에서 꺼내온 엔티티를 다시 DTO로 넣어준다
         Book item = (Book) itemService.findOne(id);
 
+        //수정페이지로 이동하기전에 수정도 다시 Dto로 넘겨줄 준비를 해준다.
         BookForm form = new BookForm();
         form.setId(item.getId());
         form.setName(item.getName());
@@ -75,6 +78,7 @@ public class ItemController {
         return "/items/updateItemForm";
     }
 
+    //
     @PostMapping("/items/{id}/edit")
     public String update(@PathVariable Long id,@Validated BookForm form,BindingResult result) {
         itemService.updateItem(id, form);
