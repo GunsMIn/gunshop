@@ -1,10 +1,14 @@
 package gunproject.gunshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +43,7 @@ public class Order {
     @OneToMany(mappedBy = "order",cascade = ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    private LocalDateTime orderDate;
+    private LocalDate orderDate;
 
     @Enumerated(value = STRING)
     private OrderStatus status;
@@ -76,7 +80,7 @@ public class Order {
         for (OrderItem item : orderItem) {
             order.setOrderItems(item);
         }
-        order.setOrderDate(LocalDateTime.now());
+        order.setOrderDate(LocalDate.now());
         order.setStatus(OrderStatus.ORDER);
         return order;
     }
@@ -89,7 +93,8 @@ public class Order {
         if (this.delivery.getStatus() == DeliveryStatus.COMP) {
             throw new IllegalStateException("이미 배송이 시작되었습니다");
         }
-        this.status = OrderStatus.CANCEL;
+
+        this.status = OrderStatus.CANCEL; // 주문 상태를 취소로 만들어준다.
         for (OrderItem orderItem : orderItems) {
             orderItem.cancel();
         }
