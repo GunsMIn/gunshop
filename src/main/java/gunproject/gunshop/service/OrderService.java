@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,8 +43,13 @@ public class OrderService {
     }
 
     public void cancel(Long id) {
-        Optional<Order> opOrder = orderRepository.findById(id);
-        Order order = opOrder.orElse(new Order());
+        Order order = orderRepository.findOne(id);
         order.cancelOrder();
+    }
+
+
+    //검색
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByString(orderSearch);
     }
 }
