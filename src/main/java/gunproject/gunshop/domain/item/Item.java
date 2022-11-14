@@ -32,8 +32,8 @@ public abstract class Item {
 
     /**
      * item의 비지니스 로직
-     * 1.재고 + 필요
-     * 2.재고 - 필요
+     * 1.재고 증가(+) 필요
+     * 2.재고 감소(-) 필요
      * */
 
     public void addStock(int stockQuantity) {
@@ -45,7 +45,7 @@ public abstract class Item {
     public void removeStock(int stockQuantity) {
         int realQuantity = this.stockQuantity -= stockQuantity;
         if (realQuantity<0) { //예외? 재고가 0보다 아래면 터뜨려야함
-                              //재고 부족!
+                              //재고 부족! -> item의 개수가 0보다 작으면 더이상 살 수 없다.
             throw new NotEnoughStockException("수량이 더 이상 줄을 수 없습니다");
         }
         //주의! 다시 넣어줘야한다.
