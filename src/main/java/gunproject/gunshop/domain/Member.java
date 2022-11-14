@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +15,16 @@ public class Member {
     /**
      * 회원은 여러 상품을 주문할 수 있다
      */
-
     @Id
     @GeneratedValue
     @Column(name = "member_id")
     private Long id;
+
+
+    private String loginId;
+
+
+    private String password;
 
     private String name;
 
