@@ -34,15 +34,17 @@ public class OrderItem {
      * */
     public static OrderItem createOrderItem(Item item,int orderPrice,int count) {
         OrderItem orderItem = new OrderItem();
+
         orderItem.setItem(item);
         orderItem.setOrderPrice(orderPrice);
         orderItem.setCount(count);
-
+        //orderItem이 생성이되면 item의 개수는 줄어야한다.
         item.removeStock(count);
         return orderItem;
     }
 
     public void cancel() {
+        //취소하면 item의 수량을 다시 늘려줘야한다.
         item.addStock(count);
     }
 
