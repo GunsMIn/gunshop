@@ -48,7 +48,7 @@ public class ItemController {
         Long registeredItem = itemService.register(item);
         log.info("등록된 item의 id는 {} 입니다.", registeredItem);
 
-        return "redirect:/";
+        return "redirect:/main";
     }
 
     //아이템 리스트 이동 페이지 ->List<Item>
