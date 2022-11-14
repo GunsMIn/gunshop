@@ -29,7 +29,6 @@ public class MemberController {
     @GetMapping("/members/new")
     public String goMemberForm(@ModelAttribute MemberForm memberForm) {
         log.info("memberForm getMapping");
-
         return "/members/createMemberForm";
     }
 
@@ -42,6 +41,8 @@ public class MemberController {
         }
         Member member = new Member();
         member.setName(memberForm.getName());
+        member.setLoginId(memberForm.getLoginId());
+        member.setPassword(memberForm.getPassword());
         member.setAddress(new Address(memberForm.getCity(), memberForm.getStreet(), memberForm.getZipcode()));
         Long joinedMember = memberService.join(member);
         log.info("등록된 회원의 id는 {}번 입니다.", joinedMember);
