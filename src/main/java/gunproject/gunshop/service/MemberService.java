@@ -1,15 +1,17 @@
 package gunproject.gunshop.service;
 
 import gunproject.gunshop.domain.Member;
+import gunproject.gunshop.dto.RestApiDto.UpdateMemberRequest;
 import gunproject.gunshop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service @Slf4j
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
@@ -45,4 +47,15 @@ public class MemberService {
     }
 
 
+    @Transactional
+    public void update(Long id, UpdateMemberRequest updateMemberRequest) {
+        log.info("변경된 유저의 정보: {}", updateMemberRequest);
+        Optional<Member> memberOptional = memberRepository.findById(id);
+        Member originMember = memberOptional.get();
+        //변경감지 dirty cash로 변경
+        originMember.setLoginId(updateMemberRequest.getLoginId());
+        originMember.setPassword(updateMemberRequest.getPassword());
+        originMember.setName(updateMemberRequest.getName());
+        originMember.setAddress(updateMemberRequest.getAddress());
+    }
 }
