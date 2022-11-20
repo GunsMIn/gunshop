@@ -1,5 +1,10 @@
 server:
   port: 8900
+  session:
+    tracking-modes: cookie
+
+image:
+  path: E:\file\guns\
 
 spring: #띄어쓰기 없음
   datasource: #띄어쓰기 2칸
@@ -14,6 +19,3 @@ spring: #띄어쓰기 없음
       hibernate: #띄어쓰기 6칸
         # show_sql: true #띄어쓰기 8칸
         format_sql: true #띄어쓰기 8칸
-logging.level: #띄어쓰기 없음
-  org.hibernate.SQL: debug #띄어쓰기 2칸
-  org.hibernate.type: trace #띄어쓰기 2칸
