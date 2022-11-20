@@ -60,6 +60,12 @@ xxxToOne관계는 전부다 fetch join을 해주고 xxxToMany관계는 default_b
 <summary><summary>엔티티와 API 스펙을 명확하게 분리할 수 있다.</summary>
 <summary>memberService.updateMember(id,updateMemberRequest)는 service단에서 dirty checking -> 변경감지 기법을 사용</summary>
 
+
+## 스프링 인터셉터 (로그인 사용자 인증 체크)
+<summary>session의 null검사를 통해 로그인 사용자 인증 체크를 진행. response.sendRedirect(경로)를 사용해서 비인증 사용자가 인증사용자가 되었을시 
+최초 요청 URI로 이동하게 구현 .</summary>
+
+
 <br><br>
 <b>🎈학습에 대하여 느낌점</b><br>
 jpa의 동작 방식에 대하여 알게되었다. 그리고 매핑의 종류와 각각의 매핑에대하여 더 상세하게 알게되었고<br>
