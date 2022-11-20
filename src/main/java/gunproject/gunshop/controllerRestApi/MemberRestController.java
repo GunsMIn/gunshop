@@ -1,15 +1,14 @@
 package gunproject.gunshop.controllerRestApi;
 
 import gunproject.gunshop.domain.Member;
-import gunproject.gunshop.dto.RestApiDto.CreateMemberRequest;
-import gunproject.gunshop.dto.RestApiDto.CreateMemberResponse;
-import gunproject.gunshop.dto.RestApiDto.SelectMemberDto;
+import gunproject.gunshop.dto.RestApiDto.*;
 import gunproject.gunshop.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@RestController @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/members")
 public class MemberRestController {
@@ -32,6 +31,17 @@ public class MemberRestController {
         CreateMemberResponse createMemberResponse = Member.of(joinedMember);
         return ResponseEntity.ok().body(createMemberResponse);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<UpdateMemberResponse> update(@PathVariable Long id,@RequestBody UpdateMemberRequest updateMemberRequest) {
+        log.info("----변경된 유저의 정보: {}", updateMemberRequest);
+        memberService.update(id, updateMemberRequest);
+        Member changedMember = memberService.findOne(id);
+
+        UpdateMemberResponse updateMemberResponse = Member.transUpdateDto(changedMember);
+        return ResponseEntity.ok().body(updateMemberResponse);
+    }
+
 
 
 }
