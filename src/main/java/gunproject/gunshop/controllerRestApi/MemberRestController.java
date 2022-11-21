@@ -2,11 +2,16 @@ package gunproject.gunshop.controllerRestApi;
 
 import gunproject.gunshop.domain.Member;
 import gunproject.gunshop.dto.RestApiDto.*;
+import gunproject.gunshop.repository.MemberRepository;
 import gunproject.gunshop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.PermitAll;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController @Slf4j
 @RequiredArgsConstructor
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberRestController {
 
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
 
 
     @GetMapping("/{id}")
@@ -40,6 +46,19 @@ public class MemberRestController {
 
         UpdateMemberResponse updateMemberResponse = Member.transUpdateDto(changedMember);
         return ResponseEntity.ok().body(updateMemberResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public Map<String,Object> delete(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        int statusCode = memberService.deleteMember(id);
+        if (statusCode == 1) {
+            response.put("result", id + "-> Delete Success");
+        }else{
+            response.put("result", id + "->Not found member");
+            response.put("result","Fail");
+        }
+        return response;
     }
 
 
