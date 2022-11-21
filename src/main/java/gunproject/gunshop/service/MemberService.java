@@ -1,6 +1,7 @@
 package gunproject.gunshop.service;
 
 import gunproject.gunshop.domain.Member;
+import gunproject.gunshop.dto.RestApiDto.DeleteMemberResponse;
 import gunproject.gunshop.dto.RestApiDto.UpdateMemberRequest;
 import gunproject.gunshop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +43,7 @@ public class MemberService {
         });
     }
 
+
     public List<Member> findAll() {
         return memberRepository.findAll();
     }
@@ -57,5 +59,18 @@ public class MemberService {
         originMember.setPassword(updateMemberRequest.getPassword());
         originMember.setName(updateMemberRequest.getName());
         originMember.setAddress(updateMemberRequest.getAddress());
+    }
+
+    @Transactional
+    public int deleteMember(Long id) {
+        log.info("삭제할 id : {}",id);
+        Optional<Member> member = memberRepository.findById(id);
+        if (member.isPresent()) {
+            memberRepository.delete(member.get());
+            return 1; // 삭제 성공시 1반환
+        }
+            //삭제할 회원이 없을 시 0반환
+            return 0;     
+
     }
 }
