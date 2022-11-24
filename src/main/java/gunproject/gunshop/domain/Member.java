@@ -1,7 +1,9 @@
 package gunproject.gunshop.domain;
 
 import gunproject.gunshop.dto.RestApiDto.CreateMemberResponse;
+import gunproject.gunshop.dto.RestApiDto.DeleteMemberResponse;
 import gunproject.gunshop.dto.RestApiDto.SelectMemberDto;
+import gunproject.gunshop.dto.RestApiDto.UpdateMemberResponse;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -70,6 +72,16 @@ public class Member {
                 .address(member.address)
                 .build();
     }
+
+    public static UpdateMemberResponse transUpdateDto(Member member) {
+        return UpdateMemberResponse.builder()
+                .loginId(member.loginId)
+                .password(member.password)
+                .name(member.name)
+                .address(member.address)
+                .build();
+    }
+
 
 
 
