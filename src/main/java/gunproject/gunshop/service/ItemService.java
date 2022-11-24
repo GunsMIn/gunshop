@@ -24,6 +24,10 @@ public class ItemService {
         return registerItem.getId();
     }
 
+    public Item save(BookForm form) {
+        return itemRepository.save(form.toEntity());
+    }
+
 
     //list
     @Transactional(readOnly = true)
