@@ -1,4 +1,11 @@
 package gunproject.gunshop.controllerRestApi.ExceptionHandler;
 
-public class ErrorCode {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor @Getter
+public class ErrorResult {
+
+    private String code;
+    private String message;
 }
