@@ -5,6 +5,7 @@ import gunproject.gunshop.domain.Order;
 import gunproject.gunshop.domain.OrderItem;
 import gunproject.gunshop.domain.OrderStatus;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -36,6 +37,15 @@ public class OrderDto {
         this.orderStatus = order.getStatus();
         this.orderItems = order.getOrderItems().stream()
                 .map(orderItem -> new OrderItemDto(orderItem)).collect(Collectors.toList());
+    }
 
+    @Builder
+    public OrderDto(Long orderId, String memberName, Address address, LocalDate orderDate, OrderStatus orderStatus, List<OrderItemDto> orderItems) {
+        this.orderId = orderId;
+        this.memberName = memberName;
+        this.address = address;
+        this.orderDate = orderDate;
+        this.orderStatus = orderStatus;
+        this.orderItems = orderItems;
     }
 }
