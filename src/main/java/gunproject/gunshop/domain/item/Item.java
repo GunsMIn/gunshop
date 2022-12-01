@@ -15,7 +15,7 @@ import static javax.persistence.InheritanceType.*;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Inheritance(strategy = SINGLE_TABLE)
 @DiscriminatorColumn(name = "itemType")
 public abstract class Item {
