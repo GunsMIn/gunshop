@@ -19,7 +19,6 @@ import java.util.Map;
 public class MemberRestController {
 
     private final MemberService memberService;
-    private final MemberRepository memberRepository;
 
 
     @GetMapping("/{id}")
