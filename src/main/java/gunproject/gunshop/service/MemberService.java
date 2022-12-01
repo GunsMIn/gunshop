@@ -1,6 +1,7 @@
 package gunproject.gunshop.service;
 
 import gunproject.gunshop.domain.Member;
+import gunproject.gunshop.dto.RestApiDto.CreateMemberRequest;
 import gunproject.gunshop.dto.RestApiDto.DeleteMemberResponse;
 import gunproject.gunshop.dto.RestApiDto.UpdateMemberRequest;
 import gunproject.gunshop.repository.MemberRepository;
