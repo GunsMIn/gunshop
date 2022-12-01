@@ -2,7 +2,7 @@ package gunproject.gunshop.controller.home_main;
 
 import gunproject.gunshop.domain.Member;
 import gunproject.gunshop.service.MemberService;
-import gunproject.gunshop.session.SessionConst;
+import gunproject.gunshop.dto.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
