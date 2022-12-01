@@ -1,7 +1,9 @@
 package gunproject.gunshop.service;
 
+import gunproject.gunshop.controllerRestApi.ExceptionHandler.OrderException;
 import gunproject.gunshop.domain.*;
 import gunproject.gunshop.domain.item.Item;
+import gunproject.gunshop.dto.RestApiDto.OrderDto;
 import gunproject.gunshop.repository.ItemRepository;
 import gunproject.gunshop.repository.MemberRepository;
 import gunproject.gunshop.repository.OrderRepository;
@@ -33,7 +35,7 @@ public class OrderService {
         //order 생성하려면 delivery도 필요함
         Delivery delivery = new Delivery();
         delivery.setStatus(DeliveryStatus.READY); // 배달 준비 상태
-        delivery.setAddress(member.getAddress());
+        delivery.setAddress(member.getAddress()); // 여기서 delivery에 값을 넣어준다!!!!!!!!!!1!!
 
         //주문 생성
         Order order = Order.createOrder(member, delivery, orderItem);
@@ -43,7 +45,8 @@ public class OrderService {
     }
 
     public void cancel(Long id) {
-        Order order = orderRepository.findOne(id);
+        Optional<Order> orderOptional = orderRepository.findOne(id);
+        Order order = orderOptional.orElseThrow(() -> new RuntimeException("취소할 주문건이 없습니다."));
         order.cancelOrder();
     }
 
@@ -51,5 +54,16 @@ public class OrderService {
     //검색
     public List<Order> findOrders(OrderSearch orderSearch) {
         return orderRepository.findAllByString(orderSearch);
+    }
+
+    public List<Order> findAll() {
+        List<Order> orders = orderRepository.findAll();
+        return orders;
+    }
+
+    public Order findOne(Long id) {
+        Optional<Order> optionalOrder = orderRepository.findOne(id);
+        Order order = optionalOrder.orElseThrow(() -> new OrderException("해당 "+id+"번의 ITEM은 존재하지 않습니다"));
+        return order;
     }
 }
