@@ -73,15 +73,14 @@ public class ItemController {
             fileDto.setFilename(filename);
             fileDto.setFullPath(filePath);
 
-            Long fileId = fileService.save(fileDto);
+            Long fileId = fileService.save(fileDto); // 파일 저장
             form.setFileId(fileId);
-            itemService.save(form);
+            itemService.save(form); // 아이템 저장
         } catch(Exception e) {
             e.printStackTrace();
         }
         return "redirect:/main";
     }
-
 
 
 
