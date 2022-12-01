@@ -12,9 +12,10 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public class OrderRepository {
+public class OrderRepository { // Spring data jpa를 사용하지않은 repository
 
     private final EntityManager em;
 
@@ -26,8 +27,10 @@ public class OrderRepository {
         em.persist(order);
     }
 
-    public Order findOne(Long id) {
-        return em.find(Order.class, id);
+    public Optional<Order> findOne(Long id) {
+        Order order = em.find(Order.class, id);
+        Optional<Order> optionalOrder = Optional.ofNullable(order); // service단에서 orElseThrow로 exceptionHandler 처리를 해줄 것이다
+        return optionalOrder;
     }
 
 
