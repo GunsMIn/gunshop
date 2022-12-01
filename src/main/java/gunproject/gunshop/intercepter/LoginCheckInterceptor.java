@@ -1,9 +1,8 @@
 package gunproject.gunshop.intercepter;
 
 
-import gunproject.gunshop.session.SessionConst;
+import gunproject.gunshop.dto.SessionConst;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Session;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +24,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
            log.info("비회원 사용자 입니다.");
            //비회원 사용자면 로그인 화면으로 보내주자
             response.sendRedirect("/login?redirectURI="+requestURI);
-            return false;
+            return false;//true 이면 다음으로 진행하고, false 이면 더는 진행하지 않는다
         }
 
         return true;
