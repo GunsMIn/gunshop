@@ -1,6 +1,8 @@
 package gunproject.gunshop.controllerRestApi;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import gunproject.gunshop.domain.Address;
 import gunproject.gunshop.domain.Member;
 import gunproject.gunshop.dto.RestApiDto.CreateMemberRequest;
 import gunproject.gunshop.service.MemberService;
@@ -47,10 +49,12 @@ class MemberRestControllerTest {
     @Test
     @DisplayName("회원가입 성공 테스트")
      void joinSuccess() throws Exception {
+        Address address = new Address("서울", "잠실", "2323");
         CreateMemberRequest createMemberRequest = CreateMemberRequest.builder()
                 .loginId("gunwoo9595")
                 .password("1234")
                 .name("김건우")
+                .address(address)
                 .build();
 
         when(memberService.join(any())).thenReturn(1190L);
@@ -60,6 +64,26 @@ class MemberRestControllerTest {
                 .content(objectMapper.writeValueAsBytes(createMemberRequest)))
                 .andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("중복이름 검사")
+    public void check_duplicate() throws Exception {
+        Address address = new Address("서울", "잠실", "2323");
+        CreateMemberRequest createMemberRequest = CreateMemberRequest.builder()
+                .loginId("gunwoo9595")
+                .password("1234")
+                .name("김건우")
+                .address(address)
+                .build();
+        when(memberService.join(any())).thenThrow(new IllegalStateException("이미 존재하는 회원입니다"));
+
+        mockMvc.perform(post("/api/members")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsBytes(createMemberRequest)))
+                .andDo(print())
+                .andExpect(status().isConflict());
+
     }
 
 }
