@@ -18,12 +18,11 @@ public class LoginService {
      * return이 null이면 로그인 실패인 로직
      * */
     public Member login(String loginId,String password) {
-        Optional<Member> opMember = memberRepository.findByLoginId(loginId);
-        Member member = opMember.orElseThrow(() -> new IllegalArgumentException("해당 아이디의 회원은 존재하지않습니다"));
-        if (password.equals(member.getPassword())) { // password 일치
-            return member;
-        }
-        return null;
+
+        Optional<Member> firstStepMember = memberRepository.findByLoginId(loginId);
+        Member member = firstStepMember.filter(m -> m.getPassword().equals(password))
+                .orElse(null);
+        return member;
     }
 
 }
