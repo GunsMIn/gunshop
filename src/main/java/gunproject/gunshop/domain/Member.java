@@ -4,9 +4,7 @@ import gunproject.gunshop.dto.RestApiDto.CreateMemberResponse;
 import gunproject.gunshop.dto.RestApiDto.DeleteMemberResponse;
 import gunproject.gunshop.dto.RestApiDto.SelectMemberDto;
 import gunproject.gunshop.dto.RestApiDto.UpdateMemberResponse;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -14,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter @Setter
-public class Member {
+@Getter @Setter @AllArgsConstructor
+public class Member extends BaseEntity{
 
     /**
      * 회원은 여러 상품을 주문할 수 있다
